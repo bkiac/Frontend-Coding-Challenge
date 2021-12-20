@@ -3,9 +3,6 @@ import type {
 	GiphyRequest,
 	GiphySearch,
 	GiphyTrending,
-	GiphyTrendingRequest,
-	GiphyTrendingResponse,
-	GiphySearchRequest,
 	GiphySearchResponse,
 } from "./types"
 
@@ -22,28 +19,19 @@ export type GiphyClient = {
 export function createClient({url, apiKey}: GiphyOptions): GiphyClient {
 	const giphy = axios.create({
 		baseURL: url,
-		params: {api_key: apiKey ?? ""},
+		params: {api_key: apiKey},
 	})
 
 	async function get<
-		Request extends GiphyRequest,
+		Request extends GiphyRequest | undefined,
 		Response extends GiphySearchResponse,
 	>(endpoint: string, request: Request): Promise<Response> {
 		const {data} = await giphy.get<Response>(endpoint, {params: request})
 		return data
 	}
 
-	async function trending(
-		request: GiphyTrendingRequest,
-	): Promise<GiphyTrendingResponse> {
-		return get("trending", request)
-	}
-
-	async function search(
-		request: GiphySearchRequest,
-	): Promise<GiphySearchResponse> {
-		return get("search", request)
-	}
+	const trending: GiphyTrending = async (request) => get("trending", request)
+	const search: GiphySearch = async (request) => get("search", request)
 
 	return {
 		trending,
@@ -56,4 +44,4 @@ export const backendClient = createClient({
 	apiKey: process.env.GIPHY_API_KEY,
 })
 
-export const frontendClient = createClient({url: "/api"})
+export const frontendClient = createClient({url: "/api/giphy"})
