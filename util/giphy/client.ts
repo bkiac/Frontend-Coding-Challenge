@@ -1,4 +1,4 @@
-import ky from "ky-universal"
+import axios from "axios"
 import type {
 	GiphyRequest,
 	GiphySearch,
@@ -20,18 +20,17 @@ export type GiphyClient = {
 }
 
 export function createClient({url, apiKey}: GiphyOptions): GiphyClient {
-	const giphy = ky.create({
-		prefixUrl: url,
-		searchParams: {
-			api_key: apiKey ?? "",
-		},
+	const giphy = axios.create({
+		baseURL: url,
+		params: {api_key: apiKey ?? ""},
 	})
 
 	async function get<
 		Request extends GiphyRequest,
 		Response extends GiphySearchResponse,
 	>(endpoint: string, request: Request): Promise<Response> {
-		return giphy(endpoint, {searchParams: request}).json<Response>()
+		const {data} = await giphy.get<Response>(endpoint, {params: request})
+		return data
 	}
 
 	async function trending(
