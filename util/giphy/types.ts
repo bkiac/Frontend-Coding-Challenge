@@ -16,7 +16,7 @@ export type GiphyResponse = MultiResponse
 export type GiphyTrendingRequest = GiphyRequest
 export type GiphyTrendingResponse = GiphyResponse
 export type GiphyTrending = (
-	request: GiphyTrendingRequest,
+	request?: GiphyTrendingRequest,
 ) => Promise<GiphyTrendingResponse>
 
 export type GiphySearchRequest = GiphyRequest & {
