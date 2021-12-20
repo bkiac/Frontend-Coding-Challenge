@@ -14,12 +14,16 @@ export type GiphyRequest = {
 export type GiphyResponse = MultiResponse
 
 export type GiphyTrendingRequest = GiphyRequest
-
 export type GiphyTrendingResponse = GiphyResponse
+export type GiphyTrending = (
+	request: GiphyTrendingRequest,
+) => Promise<GiphyTrendingResponse>
 
 export type GiphySearchRequest = GiphyRequest & {
 	q: string
 	lang?: string
 }
-
 export type GiphySearchResponse = GiphyResponse
+export type GiphySearch = (
+	request: GiphySearchRequest,
+) => Promise<GiphySearchResponse>

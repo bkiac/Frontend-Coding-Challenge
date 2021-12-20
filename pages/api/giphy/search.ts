@@ -1,11 +1,10 @@
 import type {NextApiHandler} from "next"
-import * as giphy from "../../../util/giphy"
+import type {GiphySearchResponse, GiphySearchRequest} from "../../../util/giphy"
+import {backendClient as giphy} from "../../../util/giphy"
 
-const handler: NextApiHandler<giphy.GiphySearchResponse> = async (req, res) => {
+const handler: NextApiHandler<GiphySearchResponse> = async (req, res) => {
 	// TODO: query object validation
-	const data = await giphy.search(
-		req.query as unknown as giphy.GiphySearchRequest,
-	)
+	const data = await giphy.search(req.query as unknown as GiphySearchRequest)
 	res.status(200).json(data)
 }
 
