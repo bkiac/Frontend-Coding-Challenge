@@ -23,7 +23,11 @@ export const SearchInput: React.VFC<SearchInputProps> = ({
 }) => (
 	<InputGroup boxShadow="base" rounded="md">
 		<InputLeftElement pointerEvents="none">
-			{isLoading ? <Spinner color="gray.400" /> : <SearchIcon color="gray.400" />}
+			{isLoading ? (
+				<Spinner color="gray.400" data-testid="loader" />
+			) : (
+				<SearchIcon color="gray.400" data-testid="searchIcon" />
+			)}
 		</InputLeftElement>
 		<Input
 			value={value}

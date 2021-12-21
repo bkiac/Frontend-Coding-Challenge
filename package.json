@@ -9,22 +9,27 @@
 		"format": "yarn format:prettier --write",
 		"format:check": "yarn format:prettier --check",
 		"format:prettier": "prettier \"./**/*.{ts,tsx,js,jsx,json,css,md}\"",
-		"test": "echo TODO"
+		"test": "jest"
 	},
 	"dependencies": {
 		"@chakra-ui/icons": "^1.1.1",
 		"@chakra-ui/react": "^1.7.3",
 		"@emotion/react": "^11",
 		"@emotion/styled": "^11",
+		"@testing-library/jest-dom": "^5.16.1",
+		"@testing-library/react": "^12.1.2",
 		"axios": "^0.24.0",
 		"framer-motion": "^4",
+		"jest": "^27.4.5",
 		"ky": "^0.28.7",
 		"next": "12.0.7",
 		"react": "17.0.2",
 		"react-dom": "17.0.2",
-		"react-query": "^3.34.5"
+		"react-query": "^3.34.5",
+		"react-test-renderer": "^17.0.2"
 	},
 	"devDependencies": {
+		"@testing-library/user-event": "^13.5.0",
 		"@types/giphy-api": "^2.0.3",
 		"@types/node": "17.0.0",
 		"@types/react": "17.0.37",
