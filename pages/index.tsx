@@ -1,7 +1,8 @@
 import {Box, Center} from "@chakra-ui/react"
 import type {GetServerSideProps, NextPage} from "next"
+import {useState} from "react"
 import {ErrorAlert, GifMasonry, SearchInput} from "../components"
-import {useDebouncedInput} from "../hooks"
+import {useDebounce} from "../hooks"
 import type {GiphyTrendingResponse} from "../util/giphy"
 import {
 	useSearchQuery,
@@ -14,8 +15,8 @@ export type HomeProps = {
 }
 
 const Home: NextPage<HomeProps> = ({trending}) => {
-	const [{raw: searchInput, debounced: query}, setSearchInput] =
-		useDebouncedInput(1000)
+	const [search, setSearch] = useState("")
+	const query = useDebounce(search, 1000)
 	const isSearching = query !== ""
 
 	const trendingQuery = useTrendingQuery({
@@ -32,8 +33,8 @@ const Home: NextPage<HomeProps> = ({trending}) => {
 		<Box p="4">
 			<Box mb="2">
 				<SearchInput
-					value={searchInput}
-					onChange={setSearchInput}
+					value={search}
+					onChange={setSearch}
 					isLoading={trendingQuery.isLoading || searchQuery.isLoading}
 					placeholder="bitcoin"
 				/>

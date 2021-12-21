@@ -1,1 +1,1 @@
-export * from "./useDebouncedInput"
+export * from "./useDebounce"
