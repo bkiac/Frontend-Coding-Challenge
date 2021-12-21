@@ -1,4 +1,4 @@
-import {Container, Input} from "@chakra-ui/react"
+import {Box, Image, Input, Wrap, WrapItem} from "@chakra-ui/react"
 import type {NextPage} from "next"
 import {useState} from "react"
 import {Debug} from "../components"
@@ -14,7 +14,7 @@ const Home: NextPage = () => {
 	})
 
 	return (
-		<Container>
+		<Box p="4">
 			<Input
 				value={query}
 				onChange={(e) => setQuery(e.target.value)}
@@ -27,14 +27,22 @@ const Home: NextPage = () => {
 				<p>An error has occurred</p>
 			)}
 
-			{isSearching
-				? searchQuery.data?.data.map(({id, slug, source}) => (
-						<Debug key={id} value={{id, slug, source}} />
-				  ))
-				: trendingQuery.data?.data.map(({id, slug, source}) => (
-						<Debug key={id} value={{id, slug, source}} />
-				  ))}
-		</Container>
+			<Wrap spacing="2" justify="center">
+				{/* {isSearching
+					? searchQuery.data?.data.map(({id, slug, source}) => (
+							<Debug key={id} value={{id, slug, source}} />
+					  ))
+					: trendingQuery.data?.data.map(({id, slug, source}) => (
+							<Debug key={id} value={{id, slug, source}} />
+					  ))} */}
+				{trendingQuery.data?.data.map(({id, images: {fixed_height}}) => (
+					<WrapItem key={id}>
+						<Image src={fixed_height.url} />
+						{/* <Debug value={{id, slug, source}} /> */}
+					</WrapItem>
+				))}
+			</Wrap>
+		</Box>
 	)
 }
 
