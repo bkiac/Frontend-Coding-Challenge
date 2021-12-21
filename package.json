@@ -6,7 +6,10 @@
 		"build": "next build",
 		"start": "next start",
 		"lint": "next lint",
-		"format": "prettier --write \"./**/*.{ts,tsx,js,jsx,json,css,md}\""
+		"format": "format:prettier --write",
+		"format:check": "format:prettier --check",
+		"format:prettier": "prettier \"./**/*.{ts,tsx,js,jsx,json,css,md}\"",
+		"test": "echo TODO"
 	},
 	"dependencies": {
 		"@chakra-ui/icons": "^1.1.1",
