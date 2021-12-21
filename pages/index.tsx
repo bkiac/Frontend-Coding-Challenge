@@ -1,7 +1,7 @@
-import {Box, Image, Input, Wrap, WrapItem} from "@chakra-ui/react"
+import {Box, Input} from "@chakra-ui/react"
 import type {NextPage} from "next"
 import {useState} from "react"
-import {Debug} from "../components"
+import {Masonry} from "../components"
 import {useSearchQuery, useTrendingQuery} from "../util/giphy"
 
 const Home: NextPage = () => {
@@ -27,21 +27,11 @@ const Home: NextPage = () => {
 				<p>An error has occurred</p>
 			)}
 
-			<Wrap spacing="2" justify="center">
-				{/* {isSearching
-					? searchQuery.data?.data.map(({id, slug, source}) => (
-							<Debug key={id} value={{id, slug, source}} />
-					  ))
-					: trendingQuery.data?.data.map(({id, slug, source}) => (
-							<Debug key={id} value={{id, slug, source}} />
-					  ))} */}
-				{trendingQuery.data?.data.map(({id, images: {fixed_height}}) => (
-					<WrapItem key={id}>
-						<Image src={fixed_height.url} />
-						{/* <Debug value={{id, slug, source}} /> */}
-					</WrapItem>
-				))}
-			</Wrap>
+			{isSearching ? (
+				<>{searchQuery.data && <Masonry gifs={searchQuery.data.data} />}</>
+			) : (
+				<>{trendingQuery.data && <Masonry gifs={trendingQuery.data.data} />}</>
+			)}
 		</Box>
 	)
 }
