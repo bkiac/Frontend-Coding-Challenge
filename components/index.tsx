@@ -1,4 +1,5 @@
 export * from "./Debug"
 export * from "./ErrorAlert"
+export * from "./GifMasonry"
 export * from "./Masonry"
 export * from "./SearchInput"
