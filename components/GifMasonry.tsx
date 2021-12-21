@@ -1,12 +1,17 @@
-import type {GIFObject} from "giphy-api"
 import {Masonry} from "./Masonry"
 import type {MasonryItem, MasonryProps} from "./Masonry"
 
-export function gifToMasonryItem({
+export type MasonryGif = {
+	id: string
+	title: string
+	images: {fixed_width: {url: string}}
+}
+
+function gifToMasonryItem({
 	id,
 	title,
 	images: {fixed_width},
-}: GIFObject): MasonryItem {
+}: MasonryGif): MasonryItem {
 	return {
 		id,
 		alt: title,
@@ -14,7 +19,7 @@ export function gifToMasonryItem({
 	}
 }
 
-export type GifMasonryProps = Omit<MasonryProps, "items"> & {gifs: GIFObject[]}
+export type GifMasonryProps = Omit<MasonryProps, "items"> & {gifs: MasonryGif[]}
 
 export const GifMasonry: React.VFC<GifMasonryProps> = ({gifs, ...props}) => (
 	<Masonry {...props} items={gifs.map(gifToMasonryItem)} />
