@@ -1,7 +1,7 @@
-import {Box, Input} from "@chakra-ui/react"
+import {Box} from "@chakra-ui/react"
 import type {NextPage} from "next"
 import {useState} from "react"
-import {Masonry} from "../components"
+import {Masonry, SearchInput} from "../components"
 import {useSearchQuery, useTrendingQuery} from "../util/giphy"
 
 const Home: NextPage = () => {
@@ -15,10 +15,11 @@ const Home: NextPage = () => {
 
 	return (
 		<Box p="4">
-			<Input
+			<SearchInput
 				value={query}
-				onChange={(e) => setQuery(e.target.value)}
+				onChange={setQuery}
 				placeholder="bitcoin"
+				mb="2"
 			/>
 
 			{(trendingQuery.isLoading || searchQuery.isLoading) && <p>Loading...</p>}

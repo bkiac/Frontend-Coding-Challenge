@@ -10,5 +10,6 @@ module.exports = {
 	extends: ["next/core-web-vitals", "bkiac"],
 	rules: {
 		"react/react-in-jsx-scope": "off",
+		"react/destructuring-assignment": "off",
 	},
 }
