@@ -21,9 +21,9 @@ export const SearchInput: React.VFC<SearchInputProps> = ({
 	isLoading = false,
 	...props
 }) => (
-	<InputGroup>
+	<InputGroup boxShadow="base" rounded="md">
 		<InputLeftElement pointerEvents="none">
-			{isLoading ? <Spinner color="gray.300" /> : <SearchIcon color="gray.300" />}
+			{isLoading ? <Spinner color="gray.400" /> : <SearchIcon color="gray.400" />}
 		</InputLeftElement>
 		<Input
 			placeholder="bitcoin"

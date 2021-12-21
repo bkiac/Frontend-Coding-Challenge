@@ -34,13 +34,14 @@ const Home: NextPage = () => {
 
 	return (
 		<Box p="4">
-			<SearchInput
-				value={searchInput}
-				onChange={setSearchInput}
-				isLoading={trendingQuery.isLoading || searchQuery.isLoading}
-				placeholder="bitcoin"
-				mb="2"
-			/>
+			<Box mb="2">
+				<SearchInput
+					value={searchInput}
+					onChange={setSearchInput}
+					isLoading={trendingQuery.isLoading || searchQuery.isLoading}
+					placeholder="bitcoin"
+				/>
+			</Box>
 
 			{error != null && (
 				<Center>
