@@ -1,6 +1,6 @@
 import {Box, Center} from "@chakra-ui/react"
 import type {GetServerSideProps, NextPage} from "next"
-import {ErrorAlert, Masonry, SearchInput} from "../components"
+import {ErrorAlert, GifMasonry, SearchInput} from "../components"
 import {useDebouncedInput} from "../hooks"
 import type {GiphyTrendingResponse} from "../util/giphy"
 import {
@@ -45,11 +45,13 @@ const Home: NextPage<HomeProps> = ({trending}) => {
 				</Center>
 			)}
 
-			{isSearching ? (
-				<>{searchQuery.data && <Masonry gifs={searchQuery.data.data} />}</>
-			) : (
-				<>{trendingQuery.data && <Masonry gifs={trendingQuery.data.data} />}</>
-			)}
+			<GifMasonry
+				gifs={
+					(isSearching ? searchQuery.data?.data : trendingQuery.data?.data) ?? []
+				}
+				columnCount={[1, 2, 3, 4, 5]}
+				columnGap={2}
+			/>
 		</Box>
 	)
 }
