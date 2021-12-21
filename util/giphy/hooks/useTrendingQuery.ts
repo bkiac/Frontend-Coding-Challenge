@@ -7,11 +7,11 @@ export function useTrendingQuery(args?: {
 	request?: GiphyTrendingRequest
 	options?: UseQueryOptions<
 		GiphyTrendingResponse,
-		unknown,
+		Error,
 		GiphyTrendingResponse,
 		"trending"
 	>
-}): UseQueryResult<GiphyTrendingResponse> {
+}): UseQueryResult<GiphyTrendingResponse, Error> {
 	return useQuery(
 		"trending",
 		async () => giphy.trending(args?.request),

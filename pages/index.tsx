@@ -1,7 +1,7 @@
-import {Box} from "@chakra-ui/react"
+import {Box, Center} from "@chakra-ui/react"
 import type {NextPage} from "next"
 import {useEffect, useState} from "react"
-import {Masonry, SearchInput} from "../components"
+import {ErrorAlert, Masonry, SearchInput} from "../components"
 import {useSearchQuery, useTrendingQuery} from "../util/giphy"
 
 const Home: NextPage = () => {
@@ -30,6 +30,8 @@ const Home: NextPage = () => {
 		options: {enabled: isSearching, cacheTime: 1},
 	})
 
+	const error = trendingQuery.error ?? searchQuery.error
+
 	return (
 		<Box p="4">
 			<SearchInput
@@ -40,10 +42,10 @@ const Home: NextPage = () => {
 				mb="2"
 			/>
 
-			{(trendingQuery.isLoading || searchQuery.isLoading) && <p>Loading...</p>}
-
-			{(trendingQuery.error != null || searchQuery.error != null) && (
-				<p>An error has occurred</p>
+			{error != null && (
+				<Center>
+					<ErrorAlert error={error} />
+				</Center>
 			)}
 
 			{isSearching ? (

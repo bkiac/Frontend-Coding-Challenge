@@ -7,11 +7,11 @@ export function useSearchQuery(args: {
 	request: GiphySearchRequest
 	options?: UseQueryOptions<
 		GiphySearchResponse,
-		unknown,
+		Error,
 		GiphySearchResponse,
 		["search", string]
 	>
-}): UseQueryResult<GiphySearchResponse> {
+}): UseQueryResult<GiphySearchResponse, Error> {
 	return useQuery(
 		["search", args.request.q],
 		async () => giphy.search(args.request),
