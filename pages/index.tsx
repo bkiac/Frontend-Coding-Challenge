@@ -35,6 +35,7 @@ const Home: NextPage = () => {
 			<SearchInput
 				value={searchInput}
 				onChange={setSearchInput}
+				isLoading={trendingQuery.isLoading || searchQuery.isLoading}
 				placeholder="bitcoin"
 				mb="2"
 			/>
