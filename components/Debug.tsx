@@ -1,3 +1,5 @@
+import {Code} from "@chakra-ui/react"
+
 export const Debug: React.VFC<{value: unknown}> = ({value}) => (
-	<pre>{JSON.stringify(value, null, 1)}</pre>
+	<Code as="pre">{JSON.stringify(value, null, 1)}</Code>
 )
