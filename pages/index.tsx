@@ -50,7 +50,7 @@ const Home: NextPage<HomeProps> = ({trending}) => {
 				gifs={
 					(isSearching ? searchQuery.data?.data : trendingQuery.data?.data) ?? []
 				}
-				columnCount={[1, 2, 3, 4, 5]}
+				columnCount={[1, 2, 3, 4, 5, 6]}
 				columnGap={2}
 			/>
 		</Box>
