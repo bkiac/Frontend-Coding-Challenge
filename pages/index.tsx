@@ -1,10 +1,19 @@
 import {Box, Center} from "@chakra-ui/react"
-import type {NextPage} from "next"
+import type {GetServerSideProps, NextPage} from "next"
 import {useEffect, useState} from "react"
 import {ErrorAlert, Masonry, SearchInput} from "../components"
-import {useSearchQuery, useTrendingQuery} from "../util/giphy"
+import type {GiphyTrendingResponse} from "../util/giphy"
+import {
+	useSearchQuery,
+	useTrendingQuery,
+	backendClient as giphy,
+} from "../util/giphy"
 
-const Home: NextPage = () => {
+export type HomeProps = {
+	trending: GiphyTrendingResponse
+}
+
+const Home: NextPage<HomeProps> = ({trending}) => {
 	const [searchInput, setSearchInput] = useState("")
 	const [query, setQuery] = useState("")
 	useEffect(() => {
@@ -24,7 +33,9 @@ const Home: NextPage = () => {
 	}, [searchInput])
 	const isSearching = query !== ""
 
-	const trendingQuery = useTrendingQuery({options: {enabled: !isSearching}})
+	const trendingQuery = useTrendingQuery({
+		options: {initialData: trending, enabled: !isSearching},
+	})
 	const searchQuery = useSearchQuery({
 		request: {q: query},
 		options: {enabled: isSearching, cacheTime: 1},
@@ -56,6 +67,11 @@ const Home: NextPage = () => {
 			)}
 		</Box>
 	)
+}
+
+export const getServerSideProps: GetServerSideProps<HomeProps> = async () => {
+	const trending = await giphy.trending()
+	return {props: {trending}}
 }
 
 export default Home
