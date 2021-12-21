@@ -6,11 +6,11 @@ export const Masonry: React.VFC<{gifs: GIFObject[]}> = ({gifs}) => (
 		{gifs.map(({id, title, images: {fixed_width}}) => (
 			<Img
 				key={id}
+				src={fixed_width.url}
+				alt={title}
 				w="100%"
 				borderRadius="xl"
 				d="inline-block"
-				src={fixed_width.url}
-				alt={title}
 			/>
 		))}
 	</Box>
