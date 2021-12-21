@@ -22,7 +22,7 @@ const Home: NextPage<HomeProps> = ({trending}) => {
 		options: {initialData: trending, enabled: !isSearching},
 	})
 	const searchQuery = useSearchQuery({
-		request: {q: query},
+		variables: {q: query},
 		options: {enabled: isSearching, cacheTime: 1},
 	})
 

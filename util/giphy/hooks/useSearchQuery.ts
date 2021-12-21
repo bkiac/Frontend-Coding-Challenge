@@ -1,10 +1,10 @@
 import type {UseQueryOptions, UseQueryResult} from "react-query"
 import {useQuery} from "react-query"
-import type {GiphySearchRequest, GiphySearchResponse} from "../types"
+import type {GiphySearchResponse} from "../types"
 import {frontendClient as giphy} from "../client"
 
 export function useSearchQuery(args: {
-	request: GiphySearchRequest
+	variables: {q: string}
 	options?: UseQueryOptions<
 		GiphySearchResponse,
 		Error,
@@ -13,8 +13,8 @@ export function useSearchQuery(args: {
 	>
 }): UseQueryResult<GiphySearchResponse, Error> {
 	return useQuery(
-		["search", args.request.q],
-		async () => giphy.search(args.request),
+		["search", args.variables.q],
+		async () => giphy.search(args.variables),
 		args.options,
 	)
 }
