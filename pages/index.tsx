@@ -1,3 +1,4 @@
+import {Container, Input} from "@chakra-ui/react"
 import type {NextPage} from "next"
 import {useState} from "react"
 import {Debug} from "../components"
@@ -13,8 +14,12 @@ const Home: NextPage = () => {
 	})
 
 	return (
-		<div>
-			<input value={query} onChange={(e) => setQuery(e.target.value)} />
+		<Container>
+			<Input
+				value={query}
+				onChange={(e) => setQuery(e.target.value)}
+				placeholder="bitcoin"
+			/>
 
 			{(trendingQuery.isLoading || searchQuery.isLoading) && <p>Loading...</p>}
 
@@ -29,7 +34,7 @@ const Home: NextPage = () => {
 				: trendingQuery.data?.data.map(({id, slug, source}) => (
 						<Debug key={id} value={{id, slug, source}} />
 				  ))}
-		</div>
+		</Container>
 	)
 }
 
