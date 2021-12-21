@@ -7,29 +7,28 @@ import {
 	InputRightElement,
 	Spinner,
 } from "@chakra-ui/react"
-import type {InputProps} from "@chakra-ui/react"
 
-export type SearchInputProps = Omit<InputProps, "value" | "onChange"> & {
+export type SearchInputProps = {
 	value: string
 	onChange: (value: string) => void
 	isLoading?: boolean
+	placeholder?: string
 }
 
 export const SearchInput: React.VFC<SearchInputProps> = ({
 	value,
 	onChange,
+	placeholder,
 	isLoading = false,
-	...props
 }) => (
 	<InputGroup boxShadow="base" rounded="md">
 		<InputLeftElement pointerEvents="none">
 			{isLoading ? <Spinner color="gray.400" /> : <SearchIcon color="gray.400" />}
 		</InputLeftElement>
 		<Input
-			placeholder="bitcoin"
-			{...props}
 			value={value}
 			onChange={(e) => onChange(e.target.value)}
+			placeholder={placeholder}
 		/>
 		<InputRightElement>
 			{value !== "" && (
