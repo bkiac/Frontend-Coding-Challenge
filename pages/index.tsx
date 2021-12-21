@@ -1,12 +1,29 @@
 import {Box} from "@chakra-ui/react"
 import type {NextPage} from "next"
-import {useState} from "react"
+import {useEffect, useState} from "react"
 import {Masonry, SearchInput} from "../components"
 import {useSearchQuery, useTrendingQuery} from "../util/giphy"
 
 const Home: NextPage = () => {
+	const [searchInput, setSearchInput] = useState("")
 	const [query, setQuery] = useState("")
+	useEffect(() => {
+		let timeout: NodeJS.Timeout | undefined
+		if (searchInput === "") {
+			setQuery("")
+		} else {
+			timeout = setTimeout(() => {
+				setQuery(searchInput)
+			}, 1000)
+		}
+		return () => {
+			if (timeout) {
+				clearTimeout(timeout)
+			}
+		}
+	}, [searchInput])
 	const isSearching = query !== ""
+
 	const trendingQuery = useTrendingQuery({options: {enabled: !isSearching}})
 	const searchQuery = useSearchQuery({
 		request: {q: query},
@@ -16,8 +33,8 @@ const Home: NextPage = () => {
 	return (
 		<Box p="4">
 			<SearchInput
-				value={query}
-				onChange={setQuery}
+				value={searchInput}
+				onChange={setSearchInput}
 				placeholder="bitcoin"
 				mb="2"
 			/>
